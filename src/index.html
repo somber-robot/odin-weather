@@ -10,84 +10,86 @@
       <header class="header">
         <h1 class="title">Gusto</h1>
         <div class="search">
-          <label for="search-bar" class="search-icon"></label>
+          <label for="search-bar" class="icon"
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="100%"
+              height="100%"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M18 10c0-4.41-3.59-8-8-8s-8 3.59-8 8 3.59 8 8 8c1.85 0 3.54-.63 4.9-1.69l5.1 5.1L21.41 20l-5.1-5.1A8 8 0 0 0 18 10M4 10c0-3.31 2.69-6 6-6s6 2.69 6 6-2.69 6-6 6-6-2.69-6-6"
+              ></path>
+            </svg>
+          </label>
           <input type="text" id="search-bar" />
         </div>
-        <button class="unit-toggle">F&deg;</button>
+        <button class="unit-toggle">&deg;F</button>
       </header>
       <div class="main">
+        <div class="location">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            class="icon"
+          >
+            <path
+              d="M12 2c-4.41 0-8 3.59-8 8-.03 6.44 7.12 11.6 7.42 11.82.17.12.38.19.58.19s.41-.06.58-.19c.3-.22 7.45-5.37 7.42-11.82 0-4.41-3.59-8-8-8m0 12c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4"
+            ></path>
+          </svg>
+          <p class="name">London</p>
+        </div>
         <div class="info">
-          <div class="location">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-              class="icon"
-            >
-              <path
-                d="M12 2c-4.41 0-8 3.59-8 8-.03 6.44 7.12 11.6 7.42 11.82.17.12.38.19.58.19s.41-.06.58-.19c.3-.22 7.45-5.37 7.42-11.82 0-4.41-3.59-8-8-8m0 12c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4"
-              ></path>
-            </svg>
-            <span class="name">London</span>
+          <p class="temperature">69.5 &deg;F</p>
+          <div class="weather-icon">
+            <img class="icon" />
           </div>
-          <div class="date">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-              class="icon"
-            >
-              <path
-                d="M19 4h-2V2h-2v2H9V2H7v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2M5 20V8h14V6v14z"
-              ></path>
-              <path d="M12 13h5v5h-5z"></path>
-            </svg>
-            <span class="value">04.09.26</span>
-          </div>
+          <p class="summary">Rain, Partially cloudy</p>
         </div>
-        <div class="temperature">
-          <p class="average">69.5</p>
-          <div class="range">
-            <p class="high">71.2</p>
-            <p class="low">67.4</p>
-          </div>
-        </div>
-        <div class="summary">
-          <img class="icon" />
-          <p class="description"></p>
-        </div>
-        <div class="extras">
-          <div class="extra humidity">
-            <img alt="humidity" class="icon" />
+      </div>
+      <div class="extras">
+        <div class="extra humidity">
+          <img alt="humidity" class="icon" />
+          <div class="info">
             <p class="title">Humidity</p>
             <p class="value">83.9</p>
           </div>
-          <div class="extra pressure">
-            <img alt="pressure" class="icon" />
+        </div>
+        <div class="extra pressure">
+          <img alt="pressure" class="icon" />
+          <div class="info">
             <p class="title">Pressure</p>
             <p class="value">1013.4</p>
           </div>
-          <div class="extra wind">
-            <img alt="wind" class="icon" />
+        </div>
+        <div class="extra wind">
+          <img alt="wind" class="icon" />
+          <div class="info">
             <p class="title">Wind</p>
             <p class="value">22.2</p>
           </div>
-          <div class="extra sunrise">
-            <img alt="sunrise" class="icon" />
+        </div>
+        <div class="extra sunrise">
+          <img alt="sunrise" class="icon" />
+          <div class="info">
             <p class="title">Sunrise</p>
-            <p class="value">6:38 AM</p>
+            <p class="value">06:38</p>
           </div>
-          <div class="extra sunset">
-            <img alt="sunset" class="icon" />
+        </div>
+        <div class="extra sunset">
+          <img alt="sunset" class="icon" />
+          <div class="info">
             <p class="title">Sunset</p>
-            <p class="value">7:31 PM</p>
+            <p class="value">19:31</p>
           </div>
-          <div class="extra uv">
-            <img alt="uv" class="icon" />
+        </div>
+        <div class="extra uv">
+          <img alt="uv" class="icon" />
+          <div class="info">
             <p class="title">UV Index</p>
             <p class="value">9</p>
           </div>
