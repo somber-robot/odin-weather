@@ -54,8 +54,11 @@ h1 {
   padding-left: 0.5rem;
 }
 
+.main {
+  background-color: aliceblue;
+}
+
 .location {
-  background-color: rgba(127, 255, 212, 0.584);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -72,7 +75,6 @@ h1 {
 .temperature,
 .weather-icon,
 .summary {
-  background-color: beige;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -116,4 +118,43 @@ h1 {
 .extra .info .value {
   font-size: 0.9rem;
   opacity: 50%;
+}
+
+.main .loading-animation {
+  display: none;
+  width: 4rem;
+}
+
+.loading .main {
+  height: 7.1rem;
+  display: flex;
+  flex-direction: column;
+  background-color: aliceblue;
+  align-items: center;
+  justify-content: center;
+}
+
+.extras .loading-animation {
+  display: none;
+  width: 3rem;
+}
+
+.loading .extra {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading .loading-animation {
+  display: flex;
+}
+
+.loading .location,
+.loading .info,
+.loading .icon {
+  display: none;
+}
+
+.loading .search .icon {
+  display: inline;
 }
