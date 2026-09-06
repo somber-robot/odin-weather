@@ -53,7 +53,7 @@ export const loadPage = (logic) => {
     const location = document.querySelector(".location .name");
     location.innerText = title(data.location);
     const temp = document.querySelector(".main .info .temperature");
-    temp.innerHTML = `${logic.data.temperature[logic.unit].toFixed(1)} &deg;${logic.unit === Unit.F ? "F" : "C"}`;
+    temp.innerHTML = `${logic.data.temperature[logic.unit].toFixed(1)} &deg;${logic.unit == Unit.F ? "F" : "C"}`;
     const weatherIcon = document.querySelector(".weather-icon .icon");
     weatherIcon.src = icons[data.icon];
     const summary = document.querySelector(".summary");
@@ -63,7 +63,10 @@ export const loadPage = (logic) => {
       const icon = document.querySelector(`.${name} .icon`);
       icon.src = icons[name];
       const value = document.querySelector(`.${name} .info .value`);
-      value.innerText = data[name];
+      let dataVal = data[name];
+      if (["sunrise", "sunset"].includes(name))
+        dataVal = dataVal.substring(0, dataVal.length - 3);
+      value.innerText = dataVal;
     }
     const windIcon = document.querySelector(".wind .icon");
     windIcon.src = icons.windBox;
@@ -77,10 +80,11 @@ export const loadPage = (logic) => {
   };
 
   const toggle = document.querySelector(".unit-toggle");
+  toggle.innerHTML = `&deg;${logic.unit == Unit.F ? "F" : "C"}`;
   toggle.addEventListener("click", () => {
     logic.toggleUnit();
     const temp = document.querySelector(".main .info .temperature");
-    const unitHtml = `&deg;${logic.unit === Unit.F ? "F" : "C"}`;
+    const unitHtml = `&deg;${logic.unit == Unit.F ? "F" : "C"}`;
     temp.innerHTML = `${logic.data.temperature[logic.unit].toFixed(1)} ${unitHtml}`;
     toggle.innerHTML = unitHtml;
   });
@@ -120,6 +124,7 @@ export const loadPage = (logic) => {
         populateData(data);
         search.value = "";
         search.blur();
+        localStorage["initial"] = data.location;
       })
       .catch((error) => {
         console.log(error);
@@ -137,5 +142,5 @@ export const loadPage = (logic) => {
       });
   };
 
-  setData(logic.getInitialLocation());
+  setData(logic.initial);
 };

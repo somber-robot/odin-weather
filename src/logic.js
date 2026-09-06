@@ -19,11 +19,36 @@ export class LogicHandler {
       sunset: "--:--",
       uv: 0,
     };
+    this.initial = "abuja";
+    this.init();
   }
 
-  getInitialLocation = () => {
-    // check for storage and load data if any
-    return "abuja";
+  storageFree = () => {
+    let storage;
+    try {
+      storage = window.localStorage;
+      const x = "__storage_test__";
+      storage.setItem(x, x);
+      storage.removeItem(x);
+      return true;
+    } catch (e) {
+      return (
+        e instanceof DOMException &&
+        e.name === "QuotaExceededError" &&
+        storage &&
+        storage.length !== 0
+      );
+    }
+  };
+
+  init = () => {
+    if (!this.storageFree()) return;
+    if (!localStorage.getItem("unit")) {
+      localStorage["unit"] = Unit.F;
+      localStorage["initial"] = "abuja";
+    }
+    this.unit = localStorage["unit"];
+    this.initial = localStorage["initial"];
   };
 
   async getLocationData(location) {
@@ -51,6 +76,7 @@ export class LogicHandler {
   }
 
   toggleUnit = () => {
-    this.unit = this.unit === Unit.F ? Unit.C : Unit.F;
+    this.unit = this.unit == Unit.F ? Unit.C : Unit.F;
+    localStorage["unit"] = this.unit;
   };
 }
