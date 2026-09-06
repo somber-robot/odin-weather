@@ -1,3 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap");
+
+:root {
+  --bg-dark: hsl(0, 0%, 0%);
+  --bg-mid: hsl(0, 0%, 7%);
+  --bg-light: hsl(0, 0%, 14%);
+  --text-high: hsl(0, 0%, 95%);
+  --text-low: hsl(0, 0%, 60%);
+  --border: hsl(0, 0%, 10%);
+  --gradient: linear-gradient(0deg, var(--bg-mid) 95%, var(--bg-light));
+  --gradient-hover: linear-gradient(0deg, var(--bg-mid), var(--bg-light));
+  --highlight: hsl(0, 0%, 40%);
+  --shadow:
+    0px 2px 2px hsla(0, 0%, 0%, 0.07), 0px 4px 4px hsla(0, 0%, 0%, 0.15);
+  --border-rad: 0.6rem;
+
+  --sans-serif: "Red Hat Display", Arial, Helvetica, sans-serif;
+  --serif: "Cormorant Garamond", "Times New Roman", Times, serif;
+}
+
+::selection {
+  background-color: white;
+  color: black;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -8,6 +33,39 @@ body {
   height: 100vh;
   align-items: center;
   justify-content: center;
+  background-color: var(--bg-dark);
+  font-family: var(--sans-serif);
+}
+
+.header .title {
+  font-family: var(--serif);
+}
+
+.header,
+.main,
+.extra,
+.error.open {
+  background: var(--gradient);
+  color: var(--text-high);
+  border-radius: var(--border-rad);
+  border: 0.1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+
+.header {
+  border-top-color: var(--highlight);
+}
+
+.search,
+#search-bar,
+.unit-toggle,
+.confirm {
+  background-color: var(--bg-light);
+  color: var(--text-high);
+}
+
+.extra .value {
+  color: var(--text-low);
 }
 
 p,
@@ -23,10 +81,9 @@ h1 {
 }
 
 .header {
-  background-color: rgba(0, 0, 255, 0.19);
-  padding: 0.5rem;
+  padding: 0.5rem 0.7rem;
   display: grid;
-  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-columns: 2fr 5.5fr 1fr;
   gap: 1.5rem;
 }
 
@@ -37,15 +94,17 @@ h1 {
 .search {
   display: flex;
   align-items: center;
-  background-color: white;
   padding: 0 0.5rem;
   border-radius: 20px;
+}
+
+.search:focus-within {
+  outline: 0.1px solid hsl(0, 0%, 80%);
 }
 
 .search .icon {
   margin-top: 0.3rem;
   width: 1.2rem;
-  height: auto;
 }
 
 #search-bar {
@@ -54,8 +113,34 @@ h1 {
   padding-left: 0.5rem;
 }
 
+#search-bar::placeholder {
+  font-size: 0.8rem;
+}
+
+#search-bar:focus {
+  outline: none;
+}
+
+.unit-toggle {
+  border-radius: 100%;
+}
+
+.unit-toggle:hover,
+.confirm:hover {
+  background-color: hsl(0, 0%, 17%);
+  cursor: pointer;
+}
+
+.unit-toggle:focus-within {
+  background-color: hsl(0, 0%, 17%);
+}
+
 .main {
-  background-color: aliceblue;
+  height: 7.1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 0.6rem;
 }
 
 .location {
@@ -63,7 +148,7 @@ h1 {
   align-items: center;
   justify-content: center;
   gap: 0.2rem;
-  font-size: 1.2rem;
+  font-size: 1rem;
   padding: 0.3rem;
 }
 
@@ -87,7 +172,11 @@ h1 {
 }
 
 .temperature {
-  font-size: 2rem;
+  font-size: 1.8rem;
+}
+
+.summary {
+  font-size: 0.9rem;
 }
 
 .extras {
@@ -97,8 +186,9 @@ h1 {
 }
 
 .extra {
-  background-color: rgba(255, 166, 0, 0.19);
   display: flex;
+  padding-left: 0.7rem;
+  gap: 0.5rem;
 }
 
 .extra .icon {
@@ -111,13 +201,12 @@ h1 {
   justify-content: center;
 }
 
-.extra .info .title {
-  font-size: 1rem;
+.extra .title {
+  font-size: 0.9rem;
 }
 
-.extra .info .value {
-  font-size: 0.9rem;
-  opacity: 50%;
+.extra .value {
+  font-size: 0.8rem;
 }
 
 .main .loading-animation {
@@ -126,12 +215,7 @@ h1 {
 }
 
 .loading .main {
-  height: 7.1rem;
-  display: flex;
-  flex-direction: column;
-  background-color: aliceblue;
   align-items: center;
-  justify-content: center;
 }
 
 .extras .loading-animation {
@@ -157,4 +241,42 @@ h1 {
 
 .loading .search .icon {
   display: inline;
+}
+
+.error {
+  display: none;
+}
+
+.error::backdrop {
+  background-color: hsla(0, 0%, 0%, 0.9);
+}
+
+.error.open {
+  border: none;
+  border-radius: var(--border-rad);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+}
+
+.error .icon {
+  width: 1rem;
+}
+
+.message {
+  font-size: 0.9rem;
+}
+
+.confirm {
+  padding: 0.3rem 1.1rem;
+  border: none;
+  border-radius: 1rem;
 }

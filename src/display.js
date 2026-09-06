@@ -40,6 +40,12 @@ const icons = {
   empty,
 };
 
+document.querySelectorAll(".loading-animation").forEach((svg) => {
+  svg.innerHTML = `
+    <circle fill="#FFFFFF" stroke="#FFFFFF" stroke-width="15" r="15" cx="40" cy="100"><animate attributeName="opacity" calcMode="spline" dur="2" values="1;0;1;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="-.4"></animate></circle><circle fill="#FFFFFF" stroke="#FFFFFF" stroke-width="15" r="15" cx="100" cy="100"><animate attributeName="opacity" calcMode="spline" dur="2" values="1;0;1;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="-.2"></animate></circle><circle fill="#FFFFFF" stroke="#FFFFFF" stroke-width="15" r="15" cx="160" cy="100"><animate attributeName="opacity" calcMode="spline" dur="2" values="1;0;1;" keySplines=".5 0 .5 1;.5 0 .5 1" repeatCount="indefinite" begin="0"></animate></circle>
+  `;
+});
+
 export const loadPage = (logic) => {
   const title = (str) => {
     return str
@@ -80,12 +86,12 @@ export const loadPage = (logic) => {
   };
 
   const toggle = document.querySelector(".unit-toggle");
-  toggle.innerHTML = `&deg;${logic.unit == Unit.F ? "F" : "C"}`;
+  toggle.innerHTML = `${logic.unit == Unit.F ? "F" : "C"}`;
   toggle.addEventListener("click", () => {
     logic.toggleUnit();
     const temp = document.querySelector(".main .info .temperature");
-    const unitHtml = `&deg;${logic.unit == Unit.F ? "F" : "C"}`;
-    temp.innerHTML = `${logic.data.temperature[logic.unit].toFixed(1)} ${unitHtml}`;
+    const unitHtml = `${logic.unit == Unit.F ? "F" : "C"}`;
+    temp.innerHTML = `${logic.data.temperature[logic.unit].toFixed(1)} &deg;${unitHtml}`;
     toggle.innerHTML = unitHtml;
   });
 
@@ -105,10 +111,14 @@ export const loadPage = (logic) => {
       event.clientX > rect.right ||
       event.clientY < rect.top ||
       event.clientY > rect.bottom;
-    if (isClickOutside) errorModal.close();
+    if (isClickOutside) {
+      errorModal.classList.remove("open");
+      errorModal.close();
+    }
   });
   const errorConfirm = document.querySelector(".confirm");
   errorConfirm.addEventListener("click", () => {
+    errorModal.classList.remove("open");
     errorModal.close();
   });
 
@@ -134,6 +144,7 @@ export const loadPage = (logic) => {
         else if (error.message === "Failed to fetch")
           message.innerText = "No network connection.";
         else message.innerText = "An unknown error occured.";
+        errorModal.classList.add("open");
         errorModal.showModal();
         populateData(originalData);
       })
