@@ -1,4 +1,4 @@
-const Unit = Object.freeze({ F: 0, C: 1 });
+export const Unit = Object.freeze({ F: 0, C: 1 });
 
 const url =
   "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/";
@@ -7,11 +7,28 @@ const key = "JTMT55S82NW9ZWE7Z74E2PTTA";
 export class LogicHandler {
   constructor() {
     this.unit = Unit.F;
+    this.data = {
+      location: "--------",
+      temperature: [0, 0],
+      summary: "--------",
+      icon: "empty",
+      humidity: 0,
+      pressure: 0,
+      wind: 0.0,
+      sunrise: "--:--",
+      sunset: "--:--",
+      uv: 0,
+    };
   }
+
+  getInitialLocation = () => {
+    // check for storage and load data if any
+    return "abuja";
+  };
 
   async getLocationData(location) {
     const response = await fetch(url + location + "?key=" + key);
-    if (response.status !== 200) throw Error(response.status);
+    if (!response.ok) throw Error(response.status);
     return response.json();
   }
 
@@ -32,4 +49,8 @@ export class LogicHandler {
       uv: today.uvindex,
     };
   }
+
+  toggleUnit = () => {
+    this.unit = this.unit === Unit.F ? Unit.C : Unit.F;
+  };
 }
